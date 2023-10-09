@@ -1,26 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import IncomeForm from './components/IncomeForm';
+import ExpensesForm from './components/ExpensesForm';
+import SavingForm from './components/SavingForm';
+import TransferTarget from './components/TransferTarget';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  <div>
+    <IncomeForm/>
+    <ExpensesForm/>
+    <SavingForm/>
+    <TransferTarget/>
+  </div>);
+};
 
 export default App;
