@@ -1,4 +1,3 @@
-import React from 'react';
 import React, { useState } from 'react';
 import IncomeForm from './components/IncomeForm';
 import ExpensesForm from './components/ExpensesForm';
