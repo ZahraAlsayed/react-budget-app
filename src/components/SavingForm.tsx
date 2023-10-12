@@ -1,40 +1,41 @@
 import React, { useState } from 'react';
 const SavingForm =()=> {
-    const [target, setTarget] = useState<number | string>('');
-    const [displayedTarget, setDisplayedTarget] = useState<number | string>('');
+    const [target, setTarget] = useState<number>(0);
+    
   
-    const handleNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const newValue = event.target.value;
-      if (/^\d*$/.test(newValue) || newValue === '') {
-        setTarget(newValue);
-      }
-    };
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setTarget(Number(event.target.value));
+      };
+    
   
-    const handleDisplayValue = () => {
-      setDisplayedTarget(Number(target));
-    };
+    const handleSubmit = (event: React.FormEvent) => {
+        event.preventDefault();
+        setTarget(0);
+
+     };
   
+    
     return (
         <>
-        <form >
+        <form onSubmit={handleSubmit} >
 
             <div>
                 <label htmlFor='target'>Set Target </label>
-                <input type='number' name='target' id='target' value={target} onChange={handleNumberChange}/>
+                <input type='number' name='target' id='target' value={target} onChange={handleChange}/>
                 
             </div>
-            <button type="submit" onClick={handleDisplayValue}>Reset </button>
+            <button type="submit" >Reset </button>
         </form>
         <p>Currunt Saving : </p>
         <div>
-            {displayedTarget !== '' && (
+            
         <div>
-          <strong>Displayed Value:</strong> {displayedTarget}
+          <strong>Target: {target}</strong> 
         </div>
-      )}
+      
         </div>
         <progress max={100} value={5}/>
       </>
     );
-    };
+    }
     export default SavingForm;
