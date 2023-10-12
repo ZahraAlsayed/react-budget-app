@@ -12,16 +12,16 @@ const ExpensesForm = () => {
   
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.target;
-      setExpenses((prevIncome) => {
-        return { ...prevIncome, [name]: value };
+      setExpenses((prevIExpenes) => {
+        return { ...prevIExpenes, [name]: value };
       });
     };
   
     const handleSubmit = (event: React.FormEvent) => {
       event.preventDefault();
       if(expenses.source && expenses.amount && expenses.date){
-      setExpensesList((prevIncomes) => {
-        return [...prevIncomes, expenses];
+      setExpensesList((prevIExpenses) => {
+        return [...prevIExpenses, expenses];
       });
     };
 };
@@ -30,19 +30,19 @@ const ExpensesForm = () => {
       <div>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="source">Income Source</label>
+            <label htmlFor="source">Expenses Source</label>
             <input type="text" name="source" id="source" value={expenses.source} onChange={handleChange} required />
           </div>
           <div>
-            <label htmlFor="amount">Amount Of Income</label>
+            <label htmlFor="amount">Amount Of Expenses</label>
             <input type="number" name="amount" id="amount" value={expenses.amount} onChange={handleChange} required />
           </div>
           <div>
-            <label htmlFor="date">Date Of Income</label>
+            <label htmlFor="date">Date Of Expenses</label>
             <input type="date" name="date" id="date" value={expenses.date} onChange={handleChange} required />
           </div>
           <div>
-            <button>ADD Income</button>
+            <button>ADD Expenses</button>
           </div>
         </form>
         <ul>
