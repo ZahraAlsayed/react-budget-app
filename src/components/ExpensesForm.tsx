@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { IncomeExpenesItem } from '../type/TypeComponents';
 
 type ExpensesSourceType ={
@@ -37,11 +37,13 @@ const ExpensesForm = (props:ExpensesSourceType) => {
     }
     props.getExpenses(expenses.amount);
   };
-  const handleDelete = (index: number) => {
-    const updatedExpensesList = expensesList.filter((_, i) => i !== index);
-    setExpensesList(updatedExpensesList);
-
-};
+  const handleDelete = useCallback(
+    (index:number) => {
+      const updatedExpenses = expensesList.filter((_, i) => i !== index);
+      setExpensesList(updatedExpenses);
+    },
+    [expensesList]
+  );
 
   
 

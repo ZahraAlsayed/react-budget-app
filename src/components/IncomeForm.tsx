@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { IncomeExpenesItem } from '../type/TypeComponents';
 
 
@@ -37,10 +37,14 @@ const IncomeForm = (props:incomeSallryType ) => {
     }
   };
 
-  const handleDelete = (index: number) => {
-    const updatedIncomeList = incomeList.filter((_, i) => i !== index);
-    setIncomeList(updatedIncomeList);
-  };
+  const handleDelete = useCallback(
+    (index:number) => {
+      const updatedIncomeList = incomeList.filter((_, i) => i !== index);
+      setIncomeList(updatedIncomeList);
+    },
+    [incomeList]
+  );
+  
 
   return (
     <div className="form-container" >
