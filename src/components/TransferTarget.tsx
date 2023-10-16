@@ -1,35 +1,25 @@
 import React, { useState } from 'react';
 
 
-type TransferTargetType = {
+type TransferTarget = {
   getSavingAmount: (savingAmount: number) => void;
   curruntBalance: number;
   currentIncome: number;
   currentExpenses: number;
 };
 
-const TransferTarget = (props: TransferTargetType) => {
+const TransferTarget = ({ getSavingAmount, curruntBalance, currentIncome, currentExpenses }: TransferTarget) => {
   const [transfer, setTransfer] = useState(0);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTransfer(Number(event.target.value));
+    const newTransfer =Number(event.target.value)
+    setTransfer(newTransfer);
   };
-
-  const calculateBalance = (income: number, expenses: number, saving: number) => {
-    const balance = income - expenses - saving;
-    return balance; // Return the calculated balance
-  };
-
-  const income = props.currentIncome;
-  const expenses = props.currentExpenses;
-  const saving = props.curruntBalance;
-
-  // Calculate the balance using the calculateBalance function
-  const calculatedBalance = calculateBalance(income, expenses, saving);
+  const calculatedBalance = currentIncome - currentExpenses - curruntBalance;
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    props.getSavingAmount(transfer);
+    getSavingAmount(transfer);
     setTransfer(0);
   };
 

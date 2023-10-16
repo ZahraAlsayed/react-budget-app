@@ -1,35 +1,36 @@
 import React, { useState, useCallback } from 'react';
 import { IncomeExpenesItem } from '../type/TypeComponents';
 
-type ExpensesSourceType ={
+type ExpensesSource={
      getExpenses: (expensesSource: number) => void
-
 }
-const ExpensesForm = (props:ExpensesSourceType) => {
+const ExpensesForm = (props:ExpensesSource) => {
     const [expensesList, setExpensesList] = useState<IncomeExpenesItem[]>([]);
     const [expenses, setExpenses] = useState<IncomeExpenesItem>({
+      id: 0,
       source: '',
       amount: 0,
       date: '',
     });
-
+  
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setExpenses((prevIExpenes) => {
         return { ...prevIExpenes, [name]: value };
       });
   };
-
+  const nextId = expenses.id + 1;
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     
     if(expenses.source && expenses.amount && expenses.date){
     setExpensesList((prevIExpenses) => {
-      return [...prevIExpenses, expenses];
+      return [...prevIExpenses, { ...expenses, id: nextId }];
     });
       
       // Clear the input fields by resetting the 'income' state
       setExpenses({
+        id: nextId,
         source: '',
         amount: 0,
         date: '',
@@ -69,10 +70,10 @@ const ExpensesForm = (props:ExpensesSourceType) => {
       </form>
       <ul>
         {expensesList.length > 0 &&
-          expensesList.map((expenses, index) => (
-            <li key={index}>
+          expensesList.map((expenses) => (
+            <li key={expenses.id}>
               {expenses.source} : {expenses.amount}RS on {expenses.date}
-              <button className="deletbutten" onClick={() => handleDelete(index)}>Delete</button>
+              <button className="deletbutten" onClick={() => handleDelete(expenses.id)}>Delete</button>
             </li>
           ))}
       </ul>

@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
-//import './SavingForm.css';
+import React, { useState, useMemo } from 'react';
 
-type SavingFormType = {
+type SavingForm = {
   transSavingAmount: number;
    getSaving: (savingAmount: number) => void
-   
- 
 }
 
-const SavingForm = (props: SavingFormType,) => {
+const SavingForm = (props: SavingForm) => {
   const [target, setTarget] = useState(0);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTarget(Number(event.target.value));
+    const newTarget= Number(event.target.value);
+    setTarget(newTarget);
   };
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -22,7 +20,7 @@ const SavingForm = (props: SavingFormType,) => {
   };
 
   // Calculate the progress percentage
-  const progress = (props.transSavingAmount / target) * 100;
+  const progress = useMemo(() => (props.transSavingAmount / target) * 100, [props.transSavingAmount, target]);
   const calculatePercentage = () => {
     if (target === 0) {
       return 0; // Avoid division by zero
